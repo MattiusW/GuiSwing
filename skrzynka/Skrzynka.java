@@ -1,6 +1,8 @@
 package skrzynka;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +49,27 @@ public class Skrzynka extends JFrame {
         przycisk2.setBounds(150, 200, 50, 50);
         przycisk3.setBounds(200, 200, 50, 50);
         skrzynia.setBounds(80, 50, 200, 200);
+
+        // Dodanie akcji dla przycisków
+        ActionListener akcja = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton nacisnietyPrzycisk = (JButton) e.getSource();
+                Color kolorPrzycisku = nacisnietyPrzycisk.getBackground();
+
+                if (kolorPrzycisku.equals(Color.GREEN)) {
+                    nacisnietyPrzycisk.setBackground(Color.RED);
+                }
+
+                else {
+                    nacisnietyPrzycisk.setBackground(Color.GREEN);
+                }
+            }
+        };
+
+        przycisk1.addActionListener(akcja);
+        przycisk2.addActionListener(akcja);
+        przycisk3.addActionListener(akcja);
 
         // Dodawanie przycisków
         jPanel.add(przycisk1);
