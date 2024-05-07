@@ -6,14 +6,16 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class Skrzynka extends JFrame {
 
@@ -53,6 +55,8 @@ public class Skrzynka extends JFrame {
         przycisk3.setBounds(200, 200, 50, 50);
         skrzynia.setBounds(80, 50, 200, 200);
 
+        ArrayList<String> listaWylosowanych = randomCombination();
+        System.out.println(listaWylosowanych);
         // Dodanie akcji dla przycisków
         ActionListener akcja = new ActionListener() {
             @Override
@@ -69,6 +73,15 @@ public class Skrzynka extends JFrame {
                     nacisnietyPrzycisk.setBackground(Color.GREEN);
                     nacisnietyPrzycisk.setText("O");
                 }
+
+                if (listaWylosowanych.get(0).equals(przycisk1.getText())
+                        && listaWylosowanych.get(1).equals(przycisk2.getText())
+                        && listaWylosowanych.get(2).equals(przycisk3.getText())) {
+                    System.out.println("Wygrałeś");
+                    jPanel.setBackground(Color.GREEN);
+                    JOptionPane.showMessageDialog(skrzynia, "Brawo! Wygrałeś wielkie NIC!");
+                }
+
             }
         };
 
@@ -85,6 +98,22 @@ public class Skrzynka extends JFrame {
         add(jPanel);
 
         setVisible(true);
+    }
+
+    public ArrayList<String> randomCombination() {
+        ArrayList<String> losowanie = new ArrayList<String>();
+
+        for (int i = 0; i < 3; i++) {
+            Random rand = new Random();
+            int losowy_numer = rand.nextInt(2); // Losowanie od 0 do 1
+
+            if (losowy_numer == 0) {
+                losowanie.add("O");
+            } else {
+                losowanie.add("X");
+            }
+        }
+        return losowanie;
     }
 
     public static void main(String[] args) throws IOException {
