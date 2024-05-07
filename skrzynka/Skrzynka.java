@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 public class Skrzynka extends JFrame {
 
     private JButton przycisk1, przycisk2, przycisk3;
+    private JLabel skrzynia;
 
     public Skrzynka() throws IOException {
         setTitle("Skrzynka gra");
@@ -37,7 +38,8 @@ public class Skrzynka extends JFrame {
 
         // Dodanie obrazka
         BufferedImage skrzyniaObrazek = ImageIO.read(new File("skrzynka/Skrzynka.png"));
-        JLabel skrzynia = new JLabel(new ImageIcon(skrzyniaObrazek));
+        BufferedImage skrzyniaOtwarta = ImageIO.read(new File("skrzynka/SkrzynkaOtwarta.png"));
+        skrzynia = new JLabel(new ImageIcon(skrzyniaObrazek));
 
         // Dodanie przycisków
         przycisk1 = new JButton();
@@ -78,10 +80,14 @@ public class Skrzynka extends JFrame {
                         && listaWylosowanych.get(1).equals(przycisk2.getText())
                         && listaWylosowanych.get(2).equals(przycisk3.getText())) {
                     System.out.println("Wygrałeś");
+                    przycisk1.setBackground(Color.GREEN);
+                    przycisk2.setBackground(Color.GREEN);
+                    przycisk3.setBackground(Color.GREEN);
+                    skrzynia.setIcon(new ImageIcon(skrzyniaOtwarta));
+                    JLabel skrzynia = new JLabel(new ImageIcon(skrzyniaObrazek));
                     jPanel.setBackground(Color.GREEN);
                     JOptionPane.showMessageDialog(skrzynia, "Brawo! Wygrałeś wielkie NIC!");
                 }
-
             }
         };
 
