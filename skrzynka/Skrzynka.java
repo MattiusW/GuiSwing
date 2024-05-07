@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Skrzynka extends JFrame {
 
@@ -23,21 +24,23 @@ public class Skrzynka extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null); // Ustawienie okienka na środku ekranu
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false); // Zablokowanie możliwosci powiększania ekranu
         this.setLayout(null);
 
         // JPanel
         JPanel jPanel = new JPanel();
         jPanel.setLayout(null);
         jPanel.setBounds(0, 0, 400, 400);
+        jPanel.setBackground(Color.GRAY);
 
         // Dodanie obrazka
         BufferedImage skrzyniaObrazek = ImageIO.read(new File("skrzynka/Skrzynka.png"));
         JLabel skrzynia = new JLabel(new ImageIcon(skrzyniaObrazek));
 
         // Dodanie przycisków
-        przycisk1 = new JButton("1");
-        przycisk2 = new JButton("2");
-        przycisk3 = new JButton("3");
+        przycisk1 = new JButton();
+        przycisk2 = new JButton();
+        przycisk3 = new JButton();
 
         // Zmiana koloru przycisków
         przycisk1.setBackground(Color.RED);
@@ -59,10 +62,12 @@ public class Skrzynka extends JFrame {
 
                 if (kolorPrzycisku.equals(Color.GREEN)) {
                     nacisnietyPrzycisk.setBackground(Color.RED);
+                    nacisnietyPrzycisk.setText("X");
                 }
 
                 else {
                     nacisnietyPrzycisk.setBackground(Color.GREEN);
+                    nacisnietyPrzycisk.setText("O");
                 }
             }
         };
